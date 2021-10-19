@@ -1,12 +1,21 @@
-import React, { useEffect, Fragment } from 'react';
-import PropTypes from 'prop-types'
+import React, { useEffect, Fragment, useContext } from 'react';
+// import PropTypes from 'prop-types'
 import Spinner from '../layouts/Spinner';
 import { Link } from 'react-router-dom';
 import Repos from '../repos/Repos';
+import GithubContext from '../../context/githubContext/GithubContext';
 
     // Convert class base component in to functional using useEffect
         // Distructuring directly in functional component
-const User = ({ match, loading, repos, user, getUser, getUserRepos }) => {
+// const User = ({ match, loading, repos, user, getUser, getUserRepos }) => {
+    // come from githubcontext
+const User = ({ match }) => {
+    // intialize GithubContext
+    const githubContext = useContext(GithubContext)
+
+    // Destructuring from githubContext
+    const { getUser, user, loading, repos, getUserRepos } = githubContext;
+
     //  use useEfect in function component instead of life cycle method
     useEffect(() => {
         getUser(match.params.login)
@@ -93,12 +102,13 @@ const User = ({ match, loading, repos, user, getUser, getUserRepos }) => {
 }
 // }
 
-User.propTypes = {
-    getUser: PropTypes.func.isRequired,
-    user: PropTypes.object.isRequired,
-    loading: PropTypes.bool.isRequired,
-    getUserRepos: PropTypes.func.isRequired,
-    repos: PropTypes.array.isRequired,
-}
+    // use only property
+// User.propTypes = {
+    // getUser: PropTypes.func.isRequired,
+    // user: PropTypes.object.isRequired,
+    // loading: PropTypes.bool.isRequired,
+    // getUserRepos: PropTypes.func.isRequired,
+    // repos: PropTypes.array.isRequired,
+// }
 
 export default User;

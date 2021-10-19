@@ -1,14 +1,19 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import UserItem from './UserItem';
 import Spinner from '../layouts/Spinner'
-import PropTypes from 'prop-types'
-
-
+// import PropTypes from 'prop-types'
+import GithubContext from '../../context/githubContext/GithubContext';
 
 
     // Destructuring directly
-const Users = ({ users , loading }) => {
+// const Users = ({ users , loading }) => {  no need data destructuring because data is come from GithubContext
+const Users = () => {
 // const Users = (props) => {
+
+        // initialze GithubContext
+    const githubContext = useContext(GithubContext)
+        // Destructuring from githubContext
+    const { loading, users } = githubContext;
 
     if (loading) {
         return <Spinner />
@@ -26,10 +31,11 @@ const Users = ({ users , loading }) => {
     }
 }
 
-Users.prototype = {
-    users: PropTypes.array.isRequired,
-    loading: PropTypes.bool.isRequired,
-}
+    // no need in githubContext
+// Users.prototype = {
+//     users: PropTypes.array.isRequired,
+//     loading: PropTypes.bool.isRequired,
+// }
 
 
 

@@ -1,12 +1,19 @@
 import React from 'react'
-import { useState } from 'react'
-import PropTypes from 'prop-types'
+import { useState, useContext } from 'react'
+// import PropTypes from 'prop-types'
+import GithubContext from '../../context/githubContext/GithubContext'
+import AlertContext from '../../context/alert/alertContext';
 
-const Search = ({ showClear, clearUsers, setAlert, searchUsers }) => {
+    // No need of destructring because data come from github context
+// const Search = ({ showClear, clearUsers, setAlert, searchUsers }) => {
+const Search = () => {
 
+        // initialize githubContext
+    const githubContext = useContext(GithubContext);
+    const alertContext = useContext(AlertContext);
+
+        // useState
     const [text, setText] = useState('');
-
-
 
         // class base component 
 // class Search extends Component{
@@ -36,10 +43,14 @@ const Search = ({ showClear, clearUsers, setAlert, searchUsers }) => {
         e.preventDefault();
                 // if (this.state.text === '') {
         if (text === '') {
-            setAlert('Please Enter a username', 'light');
+                // setAlert('Please Enter a username', 'light');
+            alertContext.setAlert('Please Enter a username', 'light');
         } else {
-            // Sending data to App component
-            searchUsers(text);
+                // Sending data to App component
+            // searchUsers(text);
+
+                //data come from githubContext 
+            githubContext.searchUsers(text);
             setText('');
         }
     }
@@ -60,9 +71,12 @@ const Search = ({ showClear, clearUsers, setAlert, searchUsers }) => {
             </form>
                     {/* before destructring */}
             {/* {this.props.showClear && */}
-            {showClear &&
+                            {/* No need showClear function because data come from githubContext */}
+                 {/* {showClear && */}
+            {githubContext.users.length > 0 &&
                 // <button onClick={this.props.clearUsers} className="btn btn-light btn-block">Clear</button>
-                <button onClick={clearUsers} className="btn btn-light btn-block">Clear</button>
+                // <button onClick={clearUsers} className="btn btn-light btn-block">Clear</button>
+                <button onClick={githubContext.clearUsers} className="btn btn-light btn-block">Clear</button>
             }
             </div>
     )
@@ -70,10 +84,10 @@ const Search = ({ showClear, clearUsers, setAlert, searchUsers }) => {
 // }
 
  Search.prototype = {
-        searchUsers: PropTypes.func.isRequired,
-        clearUsers: PropTypes.func.isRequired,
-        showClear: PropTypes.bool.isRequired,
-        setAlert: PropTypes.func.isRequired,
+        // searchUsers: PropTypes.func.isRequired,
+        // clearUsers: PropTypes.func.isRequired,
+        // showClear: PropTypes.bool.isRequired,
+        // setAlert: PropTypes.func.isRequired,
     }
 
 export default Search;
