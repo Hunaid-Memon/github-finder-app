@@ -3,9 +3,9 @@ import React from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import './App.css';
 import Navbar from './components/layouts/Navbar';
-import Users from './components/users/Users';
+// import Users from './components/users/Users';
 // import axios from 'axios'
-import Search from './components/users/Search';
+// import Search from './components/users/Search';
 import { Alert } from './components/layouts/Alert';
 import About from './components/pages/About';
 import User from './components/users/User';
